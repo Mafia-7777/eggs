@@ -4,7 +4,7 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2021-03-19T01:32:57-04:00",
+    "exported_at": "2021-03-19T15:56:30-04:00",
     "name": "NodeJS",
     "author": "mafia-7777@protonmail.comm",
     "description": "NodeJS (https:\/\/nodejs.org\/en\/)",
@@ -15,7 +15,7 @@
         "quay.io\/parkervcp\/pterodactyl-images:debian_nodejs-10"
     ],
     "file_denylist": "",
-    "startup": "if [[ ! -z ${GIT_URL} ]] && [[ -d .git ]]; then git pull ${GIT_URL}\r\nelif [[ ! -z ${GIT_URL} ]] && [[ ! -d .git ]]; then git init && git pull ${GIT_URL}; fi;\r\nif [ -f \/home\/container\/package.json ]; then \/usr\/local\/bin\/npm install --production; fi;\r\n\/usr\/local\/bin\/node \/home\/container\/{{MAIN_FILE}}",
+    "startup": "if [[ ! -z ${GIT_URL} ]] && [[ -d .git ]]; then git pull ${GIT_URL}; elif [[ ! -z ${GIT_URL} ]] && [[ ! -d .git ]]; then git init && git pull ${GIT_URL}; fi;if [ -f \/home\/container\/package.json ]; then \/usr\/local\/bin\/npm install --production; fi;\/usr\/local\/bin\/node \/home\/container\/{{MAIN_FILE}}",
     "config": {
         "files": "{}",
         "startup": "{}",
