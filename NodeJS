@@ -1,0 +1,52 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1",
+        "update_url": null
+    },
+    "exported_at": "2021-03-19T01:32:57-04:00",
+    "name": "NodeJS",
+    "author": "mafia-7777@protonmail.comm",
+    "description": "NodeJS (https:\/\/nodejs.org\/en\/)",
+    "features": null,
+    "images": [
+        "quay.io\/parkervcp\/pterodactyl-images:debian_nodejs-14",
+        "quay.io\/parkervcp\/pterodactyl-images:debian_nodejs-12",
+        "quay.io\/parkervcp\/pterodactyl-images:debian_nodejs-10"
+    ],
+    "file_denylist": "",
+    "startup": "if [[ ! -z ${GIT_URL} ]] && [[ -d .git ]]; then git pull ${GIT_URL}\r\nelif [[ ! -z ${GIT_URL} ]] && [[ ! -d .git ]]; then git init && git pull ${GIT_URL}; fi;\r\nif [ -f \/home\/container\/package.json ]; then \/usr\/local\/bin\/npm install --production; fi;\r\n\/usr\/local\/bin\/node \/home\/container\/{{MAIN_FILE}}",
+    "config": {
+        "files": "{}",
+        "startup": "{}",
+        "logs": "{}",
+        "stop": "^c"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# NodeJS Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt install -y git make gcc g++ python python-dev libtool\r\n\r\nmkdir -p \/mnt\/server\r\n\r\necho -e \"install complete\"\r\nexit 0",
+            "container": "alpine:3.4",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Git URL",
+            "description": "The URL of the repo you want to clone on start up.",
+            "env_variable": "GIT_URL",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:500"
+        },
+        {
+            "name": "Main file",
+            "description": "The file that starts the process.",
+            "env_variable": "MAIN_FILE",
+            "default_value": "index.js",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:25"
+        }
+    ]
+}
